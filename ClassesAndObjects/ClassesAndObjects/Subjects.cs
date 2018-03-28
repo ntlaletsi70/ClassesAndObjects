@@ -15,66 +15,39 @@ namespace ClassesAndObjects
         {
             int returnValue = -2;
 
-            if (newSubject != null)
+            if (!(newSubject == null) && (!Contains(newSubject.Code)))
             {
                 returnValue = 0;
                 Dictionary.Add(newSubject.Code, newSubject);
             }
             else
             {
-                if (Contains(newSubject.Code))
-                {
-                    returnValue = -1;
-                }
-                else
-                {
-
-                }
+                returnValue = -1;              
             }
 
             return returnValue;
         }
 
 
-
-        public new IEnumerator GetEnumerator()
-        {
-                foreach (object subject in Dictionary.Values)
-                yield return (Subject)subject;
-        }
-
-
-        //public string this[int index, string val]
-        //{
-        //    get
-        //    {
-        //        string temp;
-        //        if (index > 0)
-                  
-        //        return (Subject)[index];
-        //    }
-        //    set
-        //    {
-        //        if (index > 1)
-
-        //        testdctnry.Add(index, val);
-        //    }
-        //}
-
-        public int Remove(string subjectCode)
+    public int Remove(string subjectCode)
         {
             int returnValue = 0;
 
             if (Dictionary.Count <= 0)
             {
-                returnValue = -1;
+              
                 throw new ListEmptyException("Subject collection is empty, nothing to remove");
             }
             else
             {
                 if (Contains(subjectCode))
                 {
+                    returnValue = 0;
                     Dictionary.Remove(subjectCode);
+                }
+                else
+                {
+                    returnValue = -1;
                 }
                     
             }
@@ -82,7 +55,23 @@ namespace ClassesAndObjects
             return returnValue;
         }
 
-        public bool Contains(string newSubject)
+        public Subject this[int subjectIndex]
+        {
+            get
+            {
+                return (Subject)Dictionary[subjectIndex];
+            }
+            set
+            {
+                Dictionary[subjectIndex] = value;
+            }
+        }
+
+
+
+   
+
+    public bool Contains(string newSubject)
         {
             bool status = false;
 
