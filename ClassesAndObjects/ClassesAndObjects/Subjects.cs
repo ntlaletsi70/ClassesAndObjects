@@ -22,7 +22,7 @@ namespace ClassesAndObjects
             }
             else
             {
-                if (Dictionary.Contains(newSubject))
+                if (Contains(newSubject.Code))
                 {
                     returnValue = -1;
                 }
@@ -35,6 +35,32 @@ namespace ClassesAndObjects
             return returnValue;
         }
 
+
+
+        public new IEnumerator GetEnumerator()
+        {
+                foreach (object subject in Dictionary.Values)
+                yield return (Subject)subject;
+        }
+
+
+        //public string this[int index, string val]
+        //{
+        //    get
+        //    {
+        //        string temp;
+        //        if (index > 0)
+                  
+        //        return (Subject)[index];
+        //    }
+        //    set
+        //    {
+        //        if (index > 1)
+
+        //        testdctnry.Add(index, val);
+        //    }
+        //}
+
         public int Remove(string subjectCode)
         {
             int returnValue = 0;
@@ -46,7 +72,7 @@ namespace ClassesAndObjects
             }
             else
             {
-                if (Dictionary.Contains(subjectCode))
+                if (Contains(subjectCode))
                 {
                     Dictionary.Remove(subjectCode);
                 }
@@ -55,5 +81,22 @@ namespace ClassesAndObjects
 
             return returnValue;
         }
+
+        public bool Contains(string newSubject)
+        {
+            bool status = false;
+
+            if(Dictionary.Contains(newSubject))
+            {
+                status = true;
+            }
+            else
+            {
+                status = false;
+            }
+
+            return status;
+        }
+
     }
 }
